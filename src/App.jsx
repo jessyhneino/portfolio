@@ -9,7 +9,7 @@ import Skills from "./components/skills/Skills";
 
 function App() {
   return (
-    <>
+    <div className="overflow-hidden">
       <Nav />
       <Home />
       <About />
@@ -18,7 +18,7 @@ function App() {
       <Projects />
       <Contact />
       <Footer />
-    </>
+    </div>
   );
 }
 
