@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import "./contact.css";
 
@@ -34,21 +34,42 @@ const ContactData = [
 
 function Contact() {
   const form = useRef();
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
   const sendEmail = (e) => {
     e.preventDefault();
 
-    emailjs.sendForm(
-      "service_kmx7vgo",
-      "template_buzoyrq",
-      form.current,
-      "lxI5idH45n6iQrC6K"
-    );
+    const name = form.current.name.value.trim();
+    const email = form.current.email.value.trim();
+    const message = form.current.message.value.trim();
+
+    // VALIDATION — لازم يعبي الكل
+    if (!name || !email || !message) {
+      setError("Please fill all fields before sending.");
+      setSuccess(false);
+      return;
+    }
+
+    // send email
+    emailjs
+      .sendForm(
+        "service_kmx7vgo",
+        "template_buzoyrq",
+        form.current,
+        "lxI5idH45n6iQrC6K"
+      )
+      .then(() => {
+        setSuccess(true);
+        setError("");
+      });
+
     e.target.reset();
   };
 
   return (
     <section
-      className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem]"
+      className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem] overflow-hidden"
       id="contact"
     >
       {/* top_section */}
@@ -66,8 +87,8 @@ function Contact() {
         </h2>
       </motion.div>
 
-      {/* contact_container */}
       <div className="w-[80%] max-[600px]:w-[90%] max-lg:w-[85%] mx-auto flex justify-between gap-10 max-md:flex-col">
+        
         {/* contact_options */}
         <div className="flex flex-col gap-6 w-[35%] max-md:w-full">
           {ContactData.map(({ id, icon, title, info, link }, index) => (
@@ -121,6 +142,28 @@ function Contact() {
             rows={10}
             className="border border-[3px] border-[var(--color-bg-variant)] p-5 rounded-md "
           ></textarea>
+
+          {/* ERROR MESSAGE */}
+          {error && (
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-red-500 text-sm"
+            >
+              {error}
+            </motion.p>
+          )}
+
+          {/* SUCCESS MESSAGE */}
+          {success && (
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-green-400 text-sm font-medium"
+            >
+              ✔️ Your message has been sent successfully!
+            </motion.p>
+          )}
 
           <button className="text-center w-max inline-block px-6 py-3 rounded-md cursor-pointer border border-[var(--color-primary)] transition-[var(--transition)] bg-[var(--color-primary)] text-[var(--color-bg)] hover:bg-[var(--color-white)] hover:text-[var(--color-bg)] hover:border-transparent">
             Send Message

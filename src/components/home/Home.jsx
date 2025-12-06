@@ -5,15 +5,15 @@ import CV from "../../assets/cv.pdf";
 
 function Home() {
   return (
-    <div className="w-[100%] p-[40px] sm:p-[60px] md:p-[100px] overflow-hidden" id="#">
-      <div className="w-[100%] md:w-[85%] lg:w-[80%] mx-auto h-full relative">
+    <div className="w-[100%] p-[40px] sm:p-[60px] md:p-[100px] overflow-hidden" id="home">
+      <div className="w-[100%] md:w-[85%] lg:w-[80%] mx-auto h-full relative contents">
 
         {/* layout: split left + right */}
         <div className="w-[100%] pt-[96px] flex flex-col-reverse justify-center md:flex-row items-center gap-10">
 
           {/* LEFT SIDE – TEXT */}
           <motion.div
-            className="flex-1 text-center md:text-left"
+            className="flex-1 text-center md:text-left ml-[20px]"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, amount: 0.3 }}
@@ -81,6 +81,7 @@ function Home() {
                 overflow-hidden
                 flex
                 justify-center
+                mr-[45px]
               "
             >
               <img className="object-cover h-full w-[80%] ml-[18px]" src={Me} alt="" />
@@ -89,7 +90,7 @@ function Home() {
 
         </div>
 
-        {/* scroll_down */}
+        {/* scroll_down
         <motion.a
           href="#about"
           className="hidden sm:block text-(--color-primary) hover:text-(--color-white) absolute right-[-140px] rotate-90 font-light transition-all"
@@ -99,7 +100,7 @@ function Home() {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           Scroll Down
-        </motion.a>
+        </motion.a> */}
 
       </div>
     </div>

@@ -9,7 +9,7 @@ import { FaCode } from "react-icons/fa";
 const servicesData = [
   {
     id: 1,
-    icon: <MdDesignServices className="text-[40px] mx-auto mb-3 text-[var(--color-primary)]" />,
+    icon: <MdDesignServices className="text-[40px] mx-auto mb-3 text-[var(--color-primary)] overflow-hidden" />,
     title: "Web Design",
     desc: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quis voluptatem, commodi facilis velit dolorum fugit in ullam vero.",
   },
@@ -29,7 +29,7 @@ const servicesData = [
 
 function Services() {
   return (
-    <section className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem]" id="service">
+    <section className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem]" id="services">
       {/* top_section */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}
@@ -44,7 +44,7 @@ function Services() {
       </motion.div>
 
       {/* container_services */}
-      <div className="w-[80%] max-[600px]:w-[90%] max-lg:w-[85%] mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="w-[80%] max-[600px]:w-[90%] max-lg:w-[85%] mx-auto grid  max-[600px]:grid-cols-1 grid-cols-2 lg:grid-cols-3 gap-8">
         {servicesData.map(({ id, icon, title, desc }, index) => (
           <motion.article
             key={id}

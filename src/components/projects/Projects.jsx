@@ -47,7 +47,7 @@ const portfolioData = [
 
 function Project() {
   return (
-    <section className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem]" id="project">
+    <section className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem] overflow-hidden" id="projects">
       {/* top_section */}
       <motion.div
         initial={{ opacity: 0, y: -30 }}

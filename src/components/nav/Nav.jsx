@@ -1,10 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// import logo from '../../assets/logo.png'
 import logo2 from '../../assets/logo2.png';
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+
+  // 🔥 Scroll Spy
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["home", "about", "skill", "service","project", "contact"];
+      let current = "home";
+
+      sections.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          const top = element.offsetTop - 300;
+          const bottom = top + element.offsetHeight;
+
+          if (window.scrollY >= top && window.scrollY < bottom) {
+            current = id;
+          }
+        }
+      });
+
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Helper function for link styles
+  const linkClass = (id) =>
+    `nav_link transition-[var(--transition)] ${
+      activeSection === id ? "text-[var(--color-primary)]" : ""
+    }`;
 
   return (
     <motion.header
@@ -27,11 +58,12 @@ function Navbar() {
 
         {/* DESKTOP MENU */}
         <nav className="hidden md:flex gap-10">
-          <a href="#" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Home</a>
-          <a href="#about" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">About</a>
-          <a href="#skill" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Skills</a>
-          <a href="#service" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Services</a>
-          <a href="#contact" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Contact</a>
+          <a href="#home" className={linkClass("home")}>Home</a>
+          <a href="#about" className={linkClass("about")}>About</a>
+          <a href="#skills" className={linkClass("skills")}>Skills</a>
+          <a href="#services" className={linkClass("services")}>Services</a>
+          <a href="#projects" className={linkClass("projects")}>Projects</a>
+          <a href="#contact" className={linkClass("contact")}>Contact</a>
         </nav>
 
         {/* MOBILE TOGGLE */}
@@ -57,13 +89,14 @@ function Navbar() {
               bg-[var(--color-bg-var)]/70 border-t border-[var(--color-primary)]
             "
           >
-            <a href="#" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Home</a>
-            <a href="#about" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">About</a>
-            <a href="#skill" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Skills</a>
-            <a href="#service" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Services</a>
-            <a href="#contact" className="nav_link hover:text-[var(--color-primary)] transition-[var(--transition)]">Contact</a>
+            <a href="#home" className={linkClass("home")} onClick={() => setOpen(false)}>Home</a>
+            <a href="#about" className={linkClass("about")} onClick={() => setOpen(false)}>About</a>
+            <a href="#skills" className={linkClass("skills")} onClick={() => setOpen(false)}>Skills</a>
+            <a href="#services" className={linkClass("services")} onClick={() => setOpen(false)}>Services</a>
+            <a href="#projects" className={linkClass("projects")} onClick={() => setOpen(false)}>Projects</a>
+            <a href="#contact" className={linkClass("contact")} onClick={() => setOpen(false)}>Contact</a>
           </motion.nav>
-        )}
+        )} 
       </AnimatePresence>
     </motion.header>
   );

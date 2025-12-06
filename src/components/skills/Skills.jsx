@@ -25,8 +25,8 @@ const SkillsData = [
 function Skills() {
   return (
     <section
-      className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem]"
-      id="skill"
+      className="pt-32 max-[600px]:pt-[5rem] max-lg:pt-[6rem] overflow-hidden"
+      id="skills"
     >
       {/* top_section */}
       <motion.div
@@ -49,7 +49,7 @@ function Skills() {
           w-[80%] max-[600px]:w-[90%] max-lg:w-[85%] mx-auto
           grid grid-cols-4 gap-6
           max-[1000px]:grid-cols-3
-          max-[750px]:grid-cols-2
+          max-[600px]:grid-cols-2
         "
       >
         {SkillsData.map(({ id, image, title, disc }, index) => (
